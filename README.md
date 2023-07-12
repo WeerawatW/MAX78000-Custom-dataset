@@ -4,6 +4,7 @@ If you have own dataset you can label by [roboflow](https://app.roboflow.com/), 
 You can labeling images by roboflow and export dataset YOLO v4 PyTorch. 
 ![](https://github.com/WeerawatW/MAX78000-prepare-dataset/blob/398a3f7c610fcc7d21005ca44188c650777365d9/roboflow.png)
 
+### Note: any--> ***custom_data*** <-- word you can change that if you want. 
 
 After exporting, place that file in your directory.
 
@@ -191,6 +192,121 @@ Than go to `lastest_log_dir` folder.
 
 ![](custom_data_images/25.png)
 
-The naxt step in this will be used `qat_best.pth.tar` but before use we must rename `qat_best.pth.tar` to `ai85-finger-numbers-qat8.pth.tar`.
+The naxt step in this will be used `qat_best.pth.tar` but before use we must rename `qat_best.pth.tar` to `ai85-custom_data-qat8.pth.tar`.
 
 ![](custom_data_images/26.png)
+
+## 2) ai8x-synthesis
+
+Place `ai85-custom_data-qat8.pth.tar` in directory according to the following structure.
+```
+ai8x-synthesis
+   └─ trained
+        └─ ai85-custom_data-qat8.pth.tar
+```
+<img src = 'custom_data_images/27.png' height = 600 width = 800>
+
+You can download [quantize_custom_data.sh](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/d077d73f8e5738c78f55f6f1827b7da1c31208ae/file_for_github/ai8x-synthesis/quantize_custom_data.sh) and place `quantize_custom_data.sh`in directory according to the following structure.
+
+```
+ai8x-synthesis
+   └─ quantize_custom_data.sh
+```
+
+In `quantize_custom_data.sh`:
+
+```
+#!/bin/sh
+python quantize.py trained/ai85-custom_data-qat8.pth.tar trained/ai85-custom_data-qat8-q.pth.tar --device MAX78000 -v "$@"
+```
+
+Note:  `ai85-custom_data-qat8.pth.tar` use in `quantization` step that use for convert to  `ai85-custom_data-qat8-q.pth.tar` .
+
+Dowload [sample_custom_data.npy](file_for_github/ai8x-synthesis/tests/sample_custom_data.npy) and place `sample_custom_data.npy` in directory according to the following structure.
+
+```
+ai8x-synthesis
+   └─ tests
+       └─ sample_custom_data.npy
+```
+![](custom_data_images/30.png)
+
+Note:  **sample_custom_data.npy** is a fake data(random numpy array) use to test your model. 
+
+Download [custom_data.yaml](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/d077d73f8e5738c78f55f6f1827b7da1c31208ae/file_for_github/ai8x-synthesis/networks/custom_data.yaml)
+
+Place `custom_data.yaml` in directory according to the following structure.
+
+```
+ai8x-synthesis
+   └─ network
+       └─ custom_data.yaml
+```
+<img src = 'custom_data_images/32.png' height = 600 width = 800>
+
+My hightlight is dataset name you can change it if you dataset are different name.
+
+<img src = 'custom_data_images/33.png' height = 600 width = 800>
+
+I configuration `layer 16 to layer 19 output_processors 0xffffffff00000000` that depend on `finger_number.py`  output.
+| number of classes | output_processors | how many bit of output_processors|
+| -------- | ---------------- | -------------------------------- |
+| 1 or 2 | 0xff00000000000000 |              8 bit               |
+| 3 or 4 | 0xffff000000000000 |             16 bit               |
+| 5 or 6 | 0xffffff0000000000 |             24 bit               |
+| 7 or 8 | 0xffffffff00000000 |             32 bit               |
+| 9 or 10 | 0xfffffffffff00000 |            44 bit               |
+
+Final step!! download [gen-custom_data.sh](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/d077d73f8e5738c78f55f6f1827b7da1c31208ae/file_for_github/ai8x-synthesis/gen-custom_data.sh)
+
+```
+ #!/bin/sh
+DEVICE="MAX78000"
+TARGET="sdk/Examples/$DEVICE/CNN"
+COMMON_ARGS="--device $DEVICE --timer 0 --display-checkpoint --verbose"
+
+python ai8xize.py --test-dir sdk/Examples/MAX78000/CNN --prefix custom_data --checkpoint-file trained/ai85-custom_data-qat8-q.pth.tar --config-file networks/custom_data.yaml --device MAX78000 --compact-data --mexpress --timer 0 --display-checkpoint --verbose --overlap-data --mlator --new-kernel-loader --overwrite --no-unload
+```
+
+The meaning of each parameter is as follows:
+| parameters | discript parameter |
+| ----------- | ----------------- |
+| test-dir sdk/Examples/MAX78000/CNN | save directory |
+| prefix custom_data| saved folder name |
+| checkpoint-file trained/ai85-custom_data-qat8-q.pth.tar | quantization format file |
+| networks/custom_data.yaml | network configuration file |
+| device MAX78000 | the chip model of the microcontroller |
+| compact-data | Use memcpy() to load input data to save code space (also enabled by default) |
+| mexpress | use express kernel loading (also enabled by default) |
+| timer 0 | use timer to time the inference (default: off, supply timer number) Whether to use timer to record the running time of CNN |
+| display-checkpoint | show parsed checkpoint data |
+| verbose | verbose output |
+| overlap-data | allow output to override input |
+| mlator | Use hardware to swap output bytes |
+| new-kernel-loader | (also enabled by default) |
+| overwrite | overwrite target (if present) |
+| no-unload | disable cnn_unload() function |
+
+```
+ai8x-synthesis
+   └─ gen-finger_numbers.sh
+```
+
+Type the following command:
+```
+$deactivate
+$cd 
+$cd ai8x-synthesis
+$source venv/bin/activate
+$./quantize_custom_data.sh
+$./gen-finger_numbers.sh
+```
+When you run `quantize_custom_data.sh`:
+
+<img src = 'custom_data_images/28.png' height = 600 width = 800>
+
+From `ai85-custom_data-qat8.pth.tar` convert to  `ai85-custom_data-qat8-q.pth.tar`.
+
+![](custom_data_images/29.png)
+
+After the run is completed, you will get the generated file in the directory `sdk/Examples/MAX78000/CNN/finger_numbers`
