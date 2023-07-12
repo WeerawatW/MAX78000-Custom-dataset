@@ -66,9 +66,41 @@ train_info.csv(annotations).
 ![](custom_data_images/11.png)
 
 
-than delete these file `test` and `train`, rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
-
+than delete these file `test` and `train`.
 ![](custom_data_images/13.png)
 
-than delete these file `test` and `train`, rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
+rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
+
+![](custom_data_images/14.png)
+
+Create `processed` folder
+
+![](custom_data_images/16.png)
+
+Move `train_info.csv` and `test_info.csv` to `processed` folder .
+
+![](custom_data_images/15.png)
+
+### Congratulation!! , now you have  `processed`, `test`, `train` folder.
+
+## 1) ai8x-training
+Process datasets 
+We use [datasets.zip](https://github.com/WeerawatW/MAX78000-Custom-dataset/releases/download/Dataset/custom_data.zip) you can download it, or you have your own dataset **move** `processed`, `test`, `train` folder into `your data` folder, in this exmaple `your data` is `custom_data` folder.
+
+After the download is complete or you have  `processed`, `test`, `train` move it to `custom_data` folder, I organize the directory according to the following structure:
+>
+```
+ai8x-training
+ └─ data
+   └─ custom_data
+             ├─ processed
+             │    ├─ test_info.csv
+             │    ├─ train_info.csv
+             │
+             ├─ test
+             └─ train
+```
+Note: if you did't `data` folder becuse you did't train ai on ai8x-training before,  you must create `data` folder first.
+
+
 
