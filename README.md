@@ -102,5 +102,10 @@ ai8x-training
 ```
 Note: if you did't `data` folder becuse you did't train ai on ai8x-training before,  you must create `data` folder first.
 
+You can download [custom_data.py](file_for_github/ai8x-training/datasets/custom_data.py) and change **custom_data** word if you want.
 
+![](custom_data_images/18.png)
 
+![](custom_data_images/19.png)
+
+![](custom_data_images/20.png)
