@@ -248,7 +248,7 @@ My hightlight is dataset name you can change it if you dataset are different nam
 
 <img src = 'custom_data_images/33.png' height = 600 width = 800>
 
-I configuration `layer 16 to layer 19 output_processors 0xffffffff00000000` that depend on `finger_number.py`  output.
+I configuration `layer 16 to layer 19 output_processors 0xffffffff00000000` that depend on `custom_data.py` output.
 | number of classes | output_processors | how many bit of output_processors|
 | -------- | ---------------- | -------------------------------- |
 | 1 or 2 | 0xff00000000000000 |              8 bit               |
