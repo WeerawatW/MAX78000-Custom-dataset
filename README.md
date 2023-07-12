@@ -104,8 +104,37 @@ Note: if you did't `data` folder becuse you did't train ai on ai8x-training befo
 
 You can download [custom_data.py](file_for_github/ai8x-training/datasets/custom_data.py) and change **custom_data** word if you want.
 
-![](custom_data_images/18.png)
+<img src = 'custom_data_images/18.png' height = 360 width = 800>
 
-![](custom_data_images/19.png)
+<img src = 'custom_data_images/19.png' height = 400 width = 800>
 
-![](custom_data_images/20.png)
+<img src = 'custom_data_images/20.png' height = 400 width = 800>
+
+Note: you should canfig output match number any class you have ,for example you have (1,2,3,4,5) 5 class you should config output (1,2,3,4,5) 5 class.
+
+You can download [train_custom_data.sh](file_for_github/ai8x-training/train_custom_data.sh) and change dataset too.
+
+Place `custom_data.py` in dataset folder.
+```
+ai8x-training
+  └─ dataset
+        └─ custom_data.py.py  
+```
+
+![](custom_data_images/21.png)
+
+```
+#!/bin/sh
+python train.py --deterministic --print-freq 200  --epochs 100 --optimizer Adam --lr 0.001 --wd 0 --model ai85tinierssd --use-bias --momentum 0.9 --weight-decay 5e-4 --dataset custom_data --device MAX78000 --obj-detection --obj-detection-params parameters/obj_detection_params_svhn.yaml --batch-size 16 --qat-policy policies/qat_policy_svhn.yaml --validation-split 0 "$@"
+```
+
+The fields have the following meanings:
+*  `name`: The dataset name, the name passed in when training the neural network
+*  `input`: The size of the neural network input, indicates: the width of the input picture is 74, the height is 74, and 3 represents the three channels of RGB(3, 74, 74)
+*  `output`: The neural network outputs classification results , in this project we need to identify 6 classes fingers,and there is 6 output class here.
+*  `loader`: A function that loads a dataset and needs to return a tuple. Each dataset has to be implemented and magical. Returns the size of the dataset. Returns a training sample in the format of a tuple. For neural networks with images as input, a three-dimensional array representing the input images. For the object detection task, tuples, composed of all callout boxes, each labeled box is, where coordinates are normalized. 
+* `collate_fn`: Since each image may have a different number of objects, we need a collate function
+        (to be passed to the DataLoader).
+        This describes how to combine these tensors of different sizes. We use lists.
+        :param batch: an iterable of N sets from __getitem__()
+        :return: a tensor of images, lists of varying-size tensors of bounding boxes and labels
