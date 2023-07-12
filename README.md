@@ -102,6 +102,13 @@ ai8x-training
 ```
 Note: if you did't `data` folder becuse you did't train ai on ai8x-training before,  you must create `data` folder first.
 
+Place `custom_data.py` in dataset folder.
+```
+ai8x-training
+  └─ dataset
+        └─ custom_data.py.py  
+```
+
 You can download [custom_data.py](file_for_github/ai8x-training/datasets/custom_data.py) and change **custom_data** word if you want.
 
 <img src = 'custom_data_images/18.png' height = 360 width = 800>
@@ -111,22 +118,6 @@ You can download [custom_data.py](file_for_github/ai8x-training/datasets/custom_
 <img src = 'custom_data_images/20.png' height = 400 width = 800>
 
 Note: you should canfig output match number any class you have ,for example you have (1,2,3,4,5) 5 class you should config output (1,2,3,4,5) 5 class.
-
-You can download [train_custom_data.sh](file_for_github/ai8x-training/train_custom_data.sh) and change dataset too.
-
-Place `custom_data.py` in dataset folder.
-```
-ai8x-training
-  └─ dataset
-        └─ custom_data.py.py  
-```
-
-![](custom_data_images/21.png)
-
-```
-#!/bin/sh
-python train.py --deterministic --print-freq 200  --epochs 100 --optimizer Adam --lr 0.001 --wd 0 --model ai85tinierssd --use-bias --momentum 0.9 --weight-decay 5e-4 --dataset custom_data --device MAX78000 --obj-detection --obj-detection-params parameters/obj_detection_params_svhn.yaml --batch-size 16 --qat-policy policies/qat_policy_svhn.yaml --validation-split 0 "$@"
-```
 
 The fields have the following meanings:
 *  `name`: The dataset name, the name passed in when training the neural network
@@ -138,3 +129,68 @@ The fields have the following meanings:
         This describes how to combine these tensors of different sizes. We use lists.
         :param batch: an iterable of N sets from __getitem__()
         :return: a tensor of images, lists of varying-size tensors of bounding boxes and labels
+
+You can download [train_custom_data.sh](file_for_github/ai8x-training/train_custom_data.sh) and change dataset too.
+
+![](custom_data_images/21.png)
+
+Place `train_custom_data.sh` in ai8x-training:
+
+```
+ai8x-training
+  └─ train_custom_data.sh
+```
+
+In `train_custom_data.sh`:
+
+```
+#!/bin/sh
+python train.py --deterministic --print-freq 200  --epochs 100 --optimizer Adam --lr 0.001 --wd 0 --model ai85tinierssd --use-bias --momentum 0.9 --weight-decay 5e-4 --dataset custom_data --device MAX78000 --obj-detection --obj-detection-params parameters/obj_detection_params_svhn.yaml --batch-size 16 --qat-policy policies/qat_policy_svhn.yaml --validation-split 0 "$@"
+```
+
+
+The meaning of each parameter is as follows:
+| Parameters | value | describe parameter |
+| ------------ |----| ------------------- |
+| deterministic |none value| Set the random number seed to produce repeatable training results |
+| print-freq | 200 | In each epech, how many training samples are printed once |
+| pr-curves |none value| Display the precision-recall curves Display the precision-recall curve |
+| epochs | 100 | the number of training times |
+| optimizer | Adam | optimizer |
+| lr | 0.001 | learning rate learning rate |
+| wd | 0 | weight decay |
+| model | ai85tinierssd | model selection, the model definition is in the models folder |
+| use-bias | none value | use bias |
+| momentum | 0.9 | Momentum, a parameter of the Adam optimizer |
+| weight-decay | 5e-4 | Weight decay to prevent overfitting |
+| dataset | custom_data | dataset name, previously defined in the dataset loading file |
+| device | MAX78000 | MCU chip model |
+| obj-detection | none value | object detection |
+| obj-detection-params | none value | parameters/obj_detection_params_svhn.yaml target recognition training parameters |
+| batch-size | 16 | The number of samples passed into the neural network each time |
+| qat-policy policies/qat_policy_svhn.yaml| none value| policy for quantization parameters |
+| validation-split | 0 | Portion of training dataset to set aside for validation We have an independent validation set, no need to divide from the training set, here is set to 0 |
+
+Open terminal and type this command:
+```
+$cd ai8x-training
+$source venv/bin/activate
+$./train_custom_data.sh
+```
+When you run `train_custom_data.sh`:
+
+<img src = 'custom_data_images/22.png' height = 500 width = 800>
+
+<img src = 'custom_data_images/23.png' height = 300 width = 800>
+
+Wait until your model train success.
+
+<img src = 'custom_data_images/24.png' height = 300 width = 800>
+
+Than go to `lastest_log_dir` folder.
+
+![](custom_data_images/25.png)
+
+The naxt step in this will be used `qat_best.pth.tar` but before use we must rename `qat_best.pth.tar` to `ai85-finger-numbers-qat8.pth.tar`.
+
+![](custom_data_images/26.png)
