@@ -316,3 +316,6 @@ When you run `gen-custom_data.sh`:
 After the run `gen-custom_data.sh` is completed, you will get the generated file in the directory `sdk/Examples/MAX78000/CNN/custom_data`
 
 ![](custom_data_images/36.png)
+
+## 3)Deployment
+[Deployment on board MAX78000EVkit](https://github.com/WeerawatW/MAX78000-hand_gesture_control/blob/main/README.md#3-deployment-on-board-max78000evkit)
