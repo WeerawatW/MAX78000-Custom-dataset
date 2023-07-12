@@ -21,6 +21,11 @@ Open  .zip file from roboflow, move `test` and `train` folder from into `custom_
 
 ![](images/extrct_file.png)
 
+
+than delete these file `test` and `train`, rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
+
+![](custom_data_images/13.png)
+
 Inside  `test` folder.
 
 ![](custom_data_images/4.png)
@@ -48,10 +53,22 @@ Then , Run `custom_dataset_convert_format.py` .
 
 After run `custom_dataset_convert_format.py` that program generate `test_rename` folder and `test_label/test_info.csv` file.
 
-
+Result
 
 ![](custom_data_images/7.png)
+
+test_rename (images).
+
+![](custom_data_images/12.png)
 
 train_info.csv(annotations).
 
 ![](custom_data_images/11.png)
+
+
+than delete these file `test` and `train`, rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
+
+![](custom_data_images/13.png)
+
+than delete these file `test` and `train`, rename `test_rename` folder -> `test` and `train_rename` folder -> `train` folder.
+
