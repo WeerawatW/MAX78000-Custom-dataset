@@ -289,7 +289,7 @@ The meaning of each parameter is as follows:
 
 ```
 ai8x-synthesis
-   └─ gen-finger_numbers.sh
+   └─ gen-custom_data.sh
 ```
 
 Type the following command:
@@ -299,7 +299,7 @@ $cd
 $cd ai8x-synthesis
 $source venv/bin/activate
 $./quantize_custom_data.sh
-$./gen-finger_numbers.sh
+$./gen-custom_data.sh
 ```
 When you run `quantize_custom_data.sh`:
 
@@ -309,4 +309,10 @@ From `ai85-custom_data-qat8.pth.tar` convert to  `ai85-custom_data-qat8-q.pth.ta
 
 ![](custom_data_images/29.png)
 
-After the run is completed, you will get the generated file in the directory `sdk/Examples/MAX78000/CNN/finger_numbers`
+When you run `gen-custom_data.sh`:
+
+<img src = 'custom_data_images/35.png' height = 600 width = 800>
+
+After the run `gen-custom_data.sh` is completed, you will get the generated file in the directory `sdk/Examples/MAX78000/CNN/custom_data`
+
+![](custom_data_images/36.png)
