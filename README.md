@@ -319,9 +319,9 @@ After the run `gen-custom_data.sh` is completed, you will get the generated file
 
 ### Troubleshooting
 
-![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Ploblem.png)
-
 If you have warning like this, i find 3 way to fix that problem.
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Ploblem.png)
 
 1) May be you have only 1 object in 1 images **you should have 2 object in 1 images** in your datasets.
 
@@ -336,6 +336,29 @@ If you have warning like this, i find 3 way to fix that problem.
 
 ![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/376890af7d8de822b37aba7ef63ab9bc9c57f450/custom_data_images/Result.png)
 
+If you have warning like this, i find 1 way to fix that problem.
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/problem2.png)
+
+1) Config yaml `output_shift:` more than -10 at layer 12,13 or warning layer. 
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/config_yaml.png)
+
+Then wait to see the results..
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/Result3.png)
+
+If you have warning like this, you forgot `quantization`.
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/Forgot%20quantization.png)
+
+1) You should do `quantization`
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/28.png)
+
+Then wait to see the results..
+
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/Result.png)
 
 ## 3)Deployment
 Click [Deployment on board MAX78000EVkit](https://github.com/WeerawatW/MAX78000-hand_gesture_control/blob/main/README.md#3-deployment-on-board-max78000evkit) to deploy AI on board MAX78000EVkit.
