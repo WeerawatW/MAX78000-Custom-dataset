@@ -358,7 +358,7 @@ If you have warning like this, you forgot `quantization`.
 
 Then wait to see the results..
 
-![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/42f825daf75e022303de7b4f4c8b0b10a89c1daf/custom_data_images/Result.png)
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/33b17c75e7b176ef4f393a0f7183fce92b122c57/custom_data_images/35.png)
 
 ## 3)Deployment
 Click [Deployment on board MAX78000EVkit](https://github.com/WeerawatW/MAX78000-hand_gesture_control/blob/main/README.md#3-deployment-on-board-max78000evkit) to deploy AI on board MAX78000EVkit.
