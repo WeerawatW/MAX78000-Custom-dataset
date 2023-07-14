@@ -319,7 +319,7 @@ After the run `gen-custom_data.sh` is completed, you will get the generated file
 
 ### Troubleshooting
 
-<img src = 'https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Ploblem.png' height = 600 width = 800>
+![](https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Ploblem.png)
 
 If you have warning like this, i find 3 way to fix that problem.
 
