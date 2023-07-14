@@ -317,5 +317,24 @@ After the run `gen-custom_data.sh` is completed, you will get the generated file
 
 ![](custom_data_images/36.png)
 
+### Troubleshooting
+
+<img src = 'https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Ploblem.png' height = 600 width = 800>
+
+If you have warning like this, i find 3 way to fix that problem.
+
+1) May be you have only 1 object in 1 images **you should have 2 object in 1 images** in your datasets.
+
+<img src = 'https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/a5ce02ac8d8ee4f70919ac54c34a2a6541a21aa3/custom_data_images/Solution.png' height = 600 width = 800>
+
+2) Add more class 
+
+<img src = 'https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/376890af7d8de822b37aba7ef63ab9bc9c57f450/custom_data_images/Solution1_2.png' height = 600 width = 800>
+
+3) Add more dataset
+ Maybe you don't have dataset enough try add more datasets, then wait to see the results..
+
+<img src = 'https://github.com/WeerawatW/MAX78000-Custom-dataset/blob/376890af7d8de822b37aba7ef63ab9bc9c57f450/custom_data_images/Result.png' height = 600 width = 800>
+
 ## 3)Deployment
 Click [Deployment on board MAX78000EVkit](https://github.com/WeerawatW/MAX78000-hand_gesture_control/blob/main/README.md#3-deployment-on-board-max78000evkit) to deploy AI on board MAX78000EVkit.
